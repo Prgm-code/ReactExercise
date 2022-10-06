@@ -1,12 +1,12 @@
 
 
-
+// responsive search bar
 function SearchBar() {
     return (
-        <div>
+        <div className="container">
 
 
-            <form className="container d-flex mt-3 col-md-6 col-12 " role="search">
+            <form className="d-flex m-3 col-sm-10  col-12  " role="search">
                 <input className="form-control " type="search" placeholder="Search" aria-label="Search" />
                    
             </form>

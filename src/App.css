@@ -1,3 +1,4 @@
+/* Conatiner & flex propertis to list cards */
 .container {
   display: flex;
   flex-wrap: wrap;
@@ -5,7 +6,7 @@
   justify-content: space-evenly;
 }
 
-
+/* Like botton modification */
 .btn-danger {
 
     display: flex;
@@ -15,30 +16,42 @@
     border-radius: 4px;
     
 }
-
+/* a white heart over red button */
 .whiteincolor {
-  display: flex;
   color: white !important;
   font-size: 0.8em;
   
 }
-
+/* to align time ago & like button */
 .timeLike {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
+/* turn over comment icon  */
 .fa-regular {
     transform: scaleX(-1);
 
 }
-
+/* stylizing comment button */
 #comments-btn {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     font-size: smaller;
 }
+/* to make a link person icon and stay black not blue  */
+.circle-user a {
+    color: #000000;
+    text-decoration: none;
+  }
 
+  /* stylizing the footer */
+.blockquote {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+   
+}
 
 
