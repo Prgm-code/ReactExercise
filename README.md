@@ -1,5 +1,7 @@
-# React App "three pics"#
+# React App "three pics"
 
-Aplicacion costruida como ejercicio 1 de la clase Introduccion a Frameworks 
-de Three Points , Full Stack Master 
+Aplicacion construida como ejercicio 1 de la clase Introduccion a Frameworks 
+de Full Stack Master ,Three Points 
 
+despliege:
+https://react.prgm.info/
