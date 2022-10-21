@@ -12,13 +12,16 @@
     display: flex;
     align-items: center;
     height: 40px;
-    background: red;
+    width: 70px ;
+    background: red ;
     border-radius: 4px;
+    justify-content: space-between;
     
 }
+
 /* a white heart over red button */
 .whiteincolor {
-  color: white !important;
+  color: white ;
   font-size: 0.8em;
   
 }

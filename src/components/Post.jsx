@@ -1,4 +1,7 @@
+import { useState } from 'react';
 
+
+   
 
 // function to get randon time on post time...
 function timeRandom(min, max) {
@@ -7,6 +10,8 @@ function timeRandom(min, max) {
 
 //build the post component
 function Post({ img, user, description, likes, comments }) {
+    const [like, setLike] = useState(likes);
+    console.log('rendering post');
 
     return (
         <div className="card d-flex m-3 mb-2   col-sm-10 col-12" >
@@ -14,11 +19,13 @@ function Post({ img, user, description, likes, comments }) {
 
             <div className="card-body">
                 <div className="timeLike"><p className="card-text"><small className="text-muted">{timeRandom(1, 60)} mins ago</small></p>
-                    <div id="like-btn">
-                        <a href="" className=" btn btn-danger">
+                    <div id="like-btn" >
+                        <button onClick={()=>{
+                            setLike(like + 1);
+                        }} className=" btn btn-danger">
                             <i className="fa-sharp fa-solid fa-heart whiteincolor"> </i>
-                            <span>{likes}</span>
-                        </a>
+                            <span>{like}</span>
+                        </button>
 
                     </div>
                 </div>
