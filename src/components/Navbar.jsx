@@ -1,4 +1,5 @@
 
+
 //navbar component whith bootstrap and icons from fontawesome
 function Navbar() {
 

@@ -9,9 +9,9 @@ function Footer() {
                 </a>
             </div>
             <div className="card-body">
-                <blockquote class="blockquote mb-0">
+                <blockquote className="blockquote mb-0">
                     <p>All Rights Reserved 2022.</p>
-                    <footer className="blockquote-footer">Prgm-code  <a href="https://www.github.com/prgm-code" target={"blank"}><i class="fa-brands fa-github"></i><cite title="Source Title"> Check my Github</cite></a></footer>
+                    <footer className="blockquote-footer">Prgm-code  <a href="https://www.github.com/prgm-code" target={"blank"}><i className="fa-brands fa-github"></i><cite title="Source Title"> Check my Github</cite></a></footer>
                 </blockquote>
             </div>
         </div>
