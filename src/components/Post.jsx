@@ -1,26 +1,20 @@
 import { useState } from 'react';
-
-
-   
-
-// function to get randon time on post time...
-function timeRandom(min, max) {
-    return Math.floor((Math.random() * (max - min + 1)) + min);
-}; 
+import { format } from 'timeago.js'
 
 //build the post component
-function Post({ img, user, description, likes, comments }) {
+function Post({ image, author, text, likes, comments, createdAt }) {
+
+    // set initial state for the likes 
     const [like, setLike] = useState(likes);
-    console.log('rendering post');
 
     return (
         <div className="card d-flex m-3 mb-2   col-sm-10 col-12" >
-            <img src={img} className="card-img-top" alt="..." />
+            <img src={image} className="card-img-top" alt="..." />
 
             <div className="card-body">
-                <div className="timeLike"><p className="card-text"><small className="text-muted">{timeRandom(1, 60)} mins ago</small></p>
+                <div className="timeLike"><p className="card-text"><small className="text-muted">{format(createdAt)}</small></p>
                     <div id="like-btn" >
-                        <button onClick={()=>{
+                        <button onClick={() => {
                             setLike(like + 1);
                         }} className=" btn btn-danger">
                             <i className="fa-sharp fa-solid fa-heart whiteincolor"> </i>
@@ -30,8 +24,8 @@ function Post({ img, user, description, likes, comments }) {
                     </div>
                 </div>
 
-                <h6 className="card-title"><strong>@{user}</strong></h6>
-                <p className="card-text">{description}.</p>
+                <h6 className="card-title"><strong>@{author}</strong></h6>
+                <p className="card-text">{text}.</p>
                 <div id="comments-btn">
                     <a href="#" className="btn btn-white"><i className="fa-regular fa-comment"></i> Comments ({comments})</a>
                 </div>
