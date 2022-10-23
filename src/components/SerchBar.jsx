@@ -1,14 +1,33 @@
 
+import { useState } from "react";
 
-// responsive search bar
-function SearchBar() {
+
+function SearchBar({ search, onSearch }) {
+
+    const [searching, setSearching] = useState(search);
+
     return (
         <div className="container">
 
 
-            <form className="d-flex m-3 col-sm-10  col-12  " role="search">
-                <input className="form-control " type="search" placeholder="Search" aria-label="Search" />
-                   
+            <form className="d-flex m-3 col-sm-10  col-12  "
+                role="search"
+                onSubmit={(e) => {
+                    e.preventDefault();
+                    onSearch(searching);
+                    setSearching('');
+
+                }}
+            >
+                <input
+                    value={search}
+                    className="form-control "
+                    type="text"
+                    placeholder="Search"
+                    aria-label="Search"
+                    onChange={(e) => onSearch(e.target.value)}
+                />
+
             </form>
         </div>
     );
