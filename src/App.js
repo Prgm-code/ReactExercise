@@ -28,25 +28,34 @@ function App() {
 
   const [token, setToken] = useState(localStorage.getItem('token'));
 
+
+  const [loginOk  , setLoginOk] = useState(false)
+
   
 
   useEffect(() => {
 
     getPosts()
     .then((response) => {
+      setLoginOk(true);
       console.log(response.data);
       setPosts(response.data);  
       setShowLoading(false);
+      
     })
     .catch((error) => {
       localStorage.removeItem('token');
+      setLoginOk(false);
 
       console.log(error);
       setToken(null);
     })
   }, [token]);
 
- 
+  function onLoginComplete (state) {
+    setLoginOk(state)
+
+  }
 
   function onSearch(text) {
     setSearch(text);
@@ -73,7 +82,7 @@ function App() {
       </div>
 
       ) : (
-        <Login setToken={setToken} />
+        <Login setToken={setToken} onLoginComplete={onLoginComplete} />
       )}
 
       <Footer />

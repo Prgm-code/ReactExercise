@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { login } from '../components/service/data-service';
 
-function Login ({ setToken }) {
+function Login ({ setToken , onLoginComplete}) {
     const [error, setError] = useState(null);
 
     function handleSubmit (event) {
@@ -18,14 +18,16 @@ function Login ({ setToken }) {
                 localStorage.setItem('token', data.token)
              
                 console.log(data.token);
+                onLoginComplete(true);
             
                
                 setToken(data.token);
 
             }).catch((err) => {
-                setError(err.message);
+                setError(err.response.data.message);
                 console.log(err);
-                //setError(err.response.data.message)
+                onLoginComplete(false);
+                
             })
     }
 
