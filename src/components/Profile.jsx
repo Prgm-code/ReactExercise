@@ -2,7 +2,7 @@
 function Profile({ avatar, userName, bio }) {
 
     return (
-        <div className="container">
+        <div className="container flex-container">
             <div className="card border-white col-md-6" id="profile-card" style={{}}>
                 <img src={avatar} className="card-img-top rounded-circle" alt="..." />
                 <div className="card-body profile-text">

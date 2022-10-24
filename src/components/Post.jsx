@@ -8,7 +8,7 @@ function Post({ image, author, text, likes, comments, createdAt }) {
     const [like, setLike] = useState(likes);
 
     return (
-        <div className="card d-flex m-3 mb-2   col-sm-10 col-12" >
+        <div className="card d-flex  my-3   col-sm-10 col-12" >
             <img src={image} className="card-img-top" alt="..." />
 
             <div className="card-body">

@@ -6,6 +6,7 @@ import SearchBar from './components/SerchBar';
 import PostList from './components/PostList';
 import Footer from './components/Footer';
 import Profile from './components/Profile';
+import Login from './components/Login';
 import { getPosts } from "./components/service/data-service";
 
 //mokup profile data
@@ -23,12 +24,29 @@ function App() {
   // set the state for the posts
   const [posts, setPosts] = useState([]);
 
-  useEffect(() => {
-    getPosts().then((posts) => {
-      setPosts(posts);
-    });
+  const [showLoading, setShowLoading] = useState(true);
 
-  }, []);
+  const [token, setToken] = useState(localStorage.getItem('token'));
+
+  
+
+  useEffect(() => {
+
+    getPosts()
+    .then((response) => {
+      console.log(response.data);
+      setPosts(response.data);  
+      setShowLoading(false);
+    })
+    .catch((error) => {
+      localStorage.removeItem('token');
+
+      console.log(error);
+      setToken(null);
+    })
+  }, [token]);
+
+ 
 
   function onSearch(text) {
     setSearch(text);
@@ -43,14 +61,21 @@ function App() {
   return (
     <div className="App">
       <Navbar onLogoClick={onLogoClick} onProfileClick={onProfileClick} />
-      {showProfile ? (
-        <Profile avatar={profile.avatar} userName={profile.userName} bio={profile.bio} />
+      {token ? ( <div>
+        {showProfile ? (
+          <Profile avatar={profile.avatar} userName={profile.userName} bio={profile.bio} />
+        ) : (
+          <div>
+            <SearchBar onSearch={onSearch} />
+            <PostList search={search} posts={posts} showLoading={showLoading}/>
+          </div>
+        )}
+      </div>
+
       ) : (
-        <>
-          <SearchBar onSearch={onSearch} />
-          <PostList search={search} posts={posts} />
-        </>
+        <Login setToken={setToken} />
       )}
+
       <Footer />
     </div>
   );

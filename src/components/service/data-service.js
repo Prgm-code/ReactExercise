@@ -1,4 +1,45 @@
+import axios from 'axios';
 
+
+
+export function getPosts() {
+    return axios.get('/api/posts', {
+        headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`,
+
+        }
+    })
+}
+
+export function login (username, password) {
+    let payload = {
+        "username": username,
+        "password": password
+    };
+   
+    console.log(payload)
+
+    return axios.post('/api/login', payload,
+        {
+            headers: {
+               
+                'Content-Type': 'application/json',
+               
+            }
+        })    
+   
+
+}
+    
+
+    
+
+
+
+
+
+
+/* 
 // example of a post object
 const posts = [
     {
@@ -60,13 +101,23 @@ const posts = [
 ];
 
 export function getPosts() {
+
     return new Promise((resolve, reject) => {
+        getData().then((response) => {
+            console.log(response.data)
+           
+        }).catch((error) => {
+            console.log(error)
+            
+        })
+
         setTimeout(() => {
             resolve([...posts]);
         }, 3000);
     }
     );
 
-}
+} */
+
 
 

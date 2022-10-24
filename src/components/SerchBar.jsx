@@ -7,10 +7,10 @@ function SearchBar({ search, onSearch }) {
     const [searching, setSearching] = useState(search);
 
     return (
-        <div className="container">
+        <div className="container ">
 
 
-            <form className="d-flex m-3 col-sm-10  col-12  "
+            <form className="d-flex my-3 col-sm-10  col-12 mx-auto"
                 role="search"
                 onSubmit={(e) => {
                     e.preventDefault();
