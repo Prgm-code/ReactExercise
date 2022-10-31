@@ -7,9 +7,9 @@ function SearchBar({ search, onSearch }) {
     const [searching, setSearching] = useState(search);
 
     return (<>
-    <div className="space"></div>
+        <div className="row col flex-container">
        
-        <div className="container mt-5 searchBar">
+        <div className="container mt-5  ">
 
 
             <form className="d-flex my-3 col-sm-10  col-12 mx-auto"
@@ -31,6 +31,7 @@ function SearchBar({ search, onSearch }) {
                 />
 
             </form>
+        </div>
         </div>
         </>);
 }
