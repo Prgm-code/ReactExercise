@@ -4,7 +4,7 @@ import { likePost } from '../components/service/data-service';
 import { Link } from 'react-router-dom';
 
 //build the post component
-function Post({ image, author, text, likes, comments, createdAt, id ,handleComments ,handleDeletePost}) {
+function Post({ image, author, text, likes, comments, createdAt, id ,handleComments ,handleDeletePost , onLogout}) {
 
     // set initial state for the likes 
     const [like, setLike] = useState(likes);
@@ -20,6 +20,7 @@ function Post({ image, author, text, likes, comments, createdAt, id ,handleComme
             })
             .catch((err) => {
                 console.log(err);
+                onLogout();
             })
             
 

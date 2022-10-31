@@ -1,7 +1,7 @@
 
 import Post from "./Post";
 
-function PostList({ search, posts, showLoading, handleComments, handleDeletePost }) {
+function PostList({ search, posts, showLoading, handleComments, handleDeletePost, onLogout }) {
 
     
 
@@ -24,6 +24,7 @@ function PostList({ search, posts, showLoading, handleComments, handleDeletePost
                             createdAt={post.createdAt}
                             handleComments={handleComments}
                             handleDeletePost={handleDeletePost}
+                            onLogout={onLogout} 
                         />
                     ))
 

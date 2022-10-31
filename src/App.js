@@ -1,5 +1,5 @@
 
-import { useState, useEffect  } from 'react';
+import { useState, useEffect } from 'react';
 import './App.css';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
@@ -18,7 +18,7 @@ import { useNavigate } from 'react-router-dom';
 function App() {
   //set state initial for search bar
   const [search, setSearch] = useState('');
- 
+
   // set the state for the posts
   const [posts, setPosts] = useState(null);
 
@@ -46,25 +46,27 @@ function App() {
 
   const [deletedPostmessage, setDeletedPostmessage] = useState(false);
 
-  const [ message, setMessage ] = useState('');
+  const [message, setMessage] = useState('');
+
+  const [postloginDeleteID, setPostloginDeleteID] = useState(null);
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!token) {  
+    if (!token) {
 
       navigate('/login');
     }
   }, [token]);
 
-        
+
   useEffect(() => {
     if (deletedPostmessage) {
       setTimeout(() => {
         setDeletedPostmessage(false);
       }, 5000);
     }
-  }, [deletedPostmessage]) 
+  }, [deletedPostmessage])
 
 
   useEffect(() => {
@@ -75,6 +77,18 @@ function App() {
     }
   }, [createdPostmessage]) //
 
+  useEffect(() => {
+    if (postloginDeleteID) {
+      deletePost(postloginDeleteID)
+        .then((response) => {
+          console.log(response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+    }
+  }, [postloginDeleteID])
+
 
   useEffect(() => {
 
@@ -84,12 +98,24 @@ function App() {
         console.log(response.data);
         setPosts(response.data);
         setShowLoading(false);
-        setId('635dee318a1cce00169717dd'); // this is the id of the user logged in
+        createPost({
+          "text": "Hello World",
+        })
 
+          .then((response) => {
+            console.log(response.data);
+            setId(response.data.author);
+            console.log(id);
+            setPostloginDeleteID(response.data.id);
+          })
+          .catch((error) => {
+            onError(error);
+          })
       })
       .catch((error) => {
         onError(error);
-      })
+      });
+
   }, [token]);
 
 
@@ -116,23 +142,18 @@ function App() {
         console.log(response.data)
         setComments(response.data.find(post => post.id === postId).comments);
         setFetchNewComments(false);
-
-      }
-      )
+      })
       .catch((error) => {
         onError(error);
         setFetchNewComments(false);
-      }
-      )
-
-
+      })
   }
 
   function handleComments(id) {
     const comments = posts.find(post => post.id === id).comments;
     console.log(comments);
     setComments(comments);
-   
+
     setPostId(id);
 
   }
@@ -154,13 +175,13 @@ function App() {
   function handleDeleteComment(postId, commentId) {
 
     deleteComment(postId, commentId)
-    
+
       .then(response => response.data)
       .then(data => {
         setMessage('Comment deleted successfully');
         setDeletedPostmessage(true);
         console.log(data);
-       
+
         updateComments(postId);
       })
       .catch(error => {
@@ -244,7 +265,7 @@ function App() {
 
   return (
     <div className="App">
-      <Navbar deletedPostmessage={deletedPostmessage} message={message}/>
+      <Navbar deletedPostmessage={deletedPostmessage} message={message} />
 
       <Routes>
 
@@ -253,20 +274,20 @@ function App() {
             currentUser={currentUser}
             onLogout={onLogout}
             handleCreatePost={handleCreatePost}
-            createdPostmessage={createdPostmessage} 
-            />} />
+            createdPostmessage={createdPostmessage}
+          />} />
 
         <Route path="/comments/:id" element={
-        <Comments 
-        comments={comments} 
-        postId={postId} 
-        setPostId={setPostId} 
-        handleDeleteComment={handleDeleteComment} 
-        fetchNewComments={fetchNewComments}
-        setFetchNewComments={setFetchNewComments} 
-        handleCreateComment={handleCreateComment} 
-        
-        />} />
+          <Comments
+            comments={comments}
+            postId={postId}
+            setPostId={setPostId}
+            handleDeleteComment={handleDeleteComment}
+            fetchNewComments={fetchNewComments}
+            setFetchNewComments={setFetchNewComments}
+            handleCreateComment={handleCreateComment}
+
+          />} />
         <Route path="/" element={
           <Home
             onSearch={onSearch}
@@ -276,10 +297,11 @@ function App() {
             handleComments={handleComments}
             handleDeletePost={handleDeletePost}
             setCommentId={setCommentId}
-          />}/>
+            onLogout={onLogout}
+          />} />
         <Route path="/login" element={
-        <Login setToken={setToken} onLoginComplete={onLoginComplete} 
-        />} />
+          <Login setToken={setToken} onLoginComplete={onLoginComplete}
+          />} />
 
       </Routes>
 

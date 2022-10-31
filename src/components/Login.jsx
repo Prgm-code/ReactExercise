@@ -41,7 +41,7 @@ function Login ({ setToken , onLoginComplete}) {
 
  return (
     <div className="login">
-        {error && <div className="alert alert-danger m-3">{error}</div>}
+        {error && <div className="alert alert-danger m-5 fixed-top">{error}</div>}
         <div className='container my-5'>
         <h1>Login</h1>
         <form onSubmit={handleSubmit}>

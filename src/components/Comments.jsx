@@ -115,7 +115,7 @@ export function Comments({ comments, handleCreateComment, postId, handleDeleteCo
         )
     } else {
         return (
-            <div className="container ">
+            <div className="container mt-5">
 
                 <p className=" p-5">"No comments yet 😢"</p>
 
