@@ -1,7 +1,7 @@
 
 import Post from "./Post";
 
-function PostList({ search, posts, showLoading }) {
+function PostList({ search, posts, showLoading, handleComments, handleDeletePost }) {
 
     
 
@@ -14,13 +14,16 @@ function PostList({ search, posts, showLoading }) {
                     .filter((post) => post.text.toLowerCase().includes(search.toLowerCase()))
                     .map((post, i) => (
                         <Post
-                            key={post.id}
+                            key={i}
+                            id={post.id}
                             image={post.image}
                             author={post.author.username}
                             text={post.text}
                             likes={post.likes}
                             comments={(post.comments).length}
                             createdAt={post.createdAt}
+                            handleComments={handleComments}
+                            handleDeletePost={handleDeletePost}
                         />
                     ))
 

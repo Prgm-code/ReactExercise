@@ -1,39 +1,28 @@
 
+import { Link } from 'react-router-dom';
 
+function Navbar({ onProfileClick, onLogoClick, deletedPostmessage, message }) {
+   
 
-function Navbar({ onProfileClick, onLogoClick }) {
-    function handleClick(e) {
-
-        if (e.target.id === "onLogo" || e.target.id === "onLogotext") {
-            onLogoClick();
-            e.preventDefault();
-            console.log('logo clicked');
-
-        } else if (e.target.id === "onProfile") {
-            onProfileClick();
-            e.preventDefault();
-            console.log('click on profile');
-        }
-        e.preventDefault();
-
-    }
-
-    return (
-        <nav className="navbar bg-light">
+    return (<>
+        <nav className="navbar bg-light fixed-top">
             <div className="container-fluid">
                 <div className="navbar-brand" >
-                    <a onClick={handleClick} id="onLogotext" href="" className=" m-2" >
-                        <i className="fa-solid fa-bolt mx-2" id="onLogo" onClick={handleClick}></i>
-                        three pics</a>
+                    <Link id="onLogotext" to={'/'} className=" m-2" >
+                        <i className="fa-solid fa-bolt mx-2" id="onLogo" ></i>
+                        three pics</Link>
                 </div>
                 <div className="circle-user"  >
-                    <a href="" className="" >
-                        <i className="fa-solid fa-user-circle fa-xl" id="onProfile" onClick={handleClick}></i>
-                    </a>
+                    <Link to={"/profile"} className="" >
+                        <i className="fa-solid fa-user-circle fa-xl" id="onProfile" ></i>
+                    </Link>
                 </div>
             </div>
+            { deletedPostmessage ? <div className="alert alert-danger mt-5 fixed-top" role="alert">{message}</div> : null }
         </nav>
 
+        
+    </>
     );
 }
 

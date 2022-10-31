@@ -2,9 +2,12 @@ import axios from 'axios';
 
 
 
+
+
 export function getPosts() {
     return axios.get('/api/posts', {
         headers: {
+            'Content-Type': 'application/json',
             'Authorization': `Bearer ${localStorage.getItem('token')}`,
 
         }
@@ -30,6 +33,78 @@ export function login (username, password) {
    
 
 }
+
+
+
+export function showUser (id) {
+    return axios.get(`/api/users/${id}`, {
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('token')}`,
+
+        }
+    })
+}
+
+
+export function likePost (id, likes) {
+    return axios.post(`/api/posts/${id}/like`,{"likes": likes+1 }, {
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('token')}`,
+
+
+        }
+    })
+}
+
+export function createPost (payload) {
+    return axios.post('/api/posts', payload, {
+        headers: {
+            'Content-Type': 'multipart/form-data',
+            'Authorization': `Bearer ${localStorage.getItem('token')}`,
+        }
+    })
+}
+
+export function createComment (payload, id) {
+    return axios.post(`/api/posts/${id}/comments`, payload, {
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('token')}`,
+        }
+    })
+}
+
+export function deletePost (id) {
+    return axios.delete(`/api/posts/${id}`, {
+
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('token')}`,
+        } } )
+}   
+
+export function deleteComment (postId, commentId) {
+    return axios.delete(`/api/posts/${postId}/comments/${commentId}`, {
+                
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('token')}`,
+            } } )
+}
+
+export function editPost (payload, id) {
+    return axios.put(`/api/posts/${id}`, payload, {
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('token')}`,
+        }
+    })
+}
+
+
+
     
 
     

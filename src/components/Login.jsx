@@ -1,8 +1,11 @@
+
 import { useState } from 'react';
 import { login } from '../components/service/data-service';
+import { useNavigate } from 'react-router-dom';
 
 function Login ({ setToken , onLoginComplete}) {
     const [error, setError] = useState(null);
+    const navigate = useNavigate(); 
 
     function handleSubmit (event) {
         event.preventDefault();
@@ -14,11 +17,13 @@ function Login ({ setToken , onLoginComplete}) {
             .then(response => response.data)
             .then(data => {
                 console.log('paso por el login');
-                console.log(data);
+                
+                
                 localStorage.setItem('token', data.token)
              
                 console.log(data.token);
                 onLoginComplete(true);
+                navigate('/'); // redirect to the home page
             
                
                 setToken(data.token);
@@ -63,7 +68,7 @@ function Login ({ setToken , onLoginComplete}) {
             </div>
             <div className="mb-3 form-check">
                 <input type="checkbox" className="form-check-input" id="exampleCheck1" />
-                <label className="form-check-label" htmlFor="exampleCheck1">Keep sesion open</label>
+                <label className="form-check-label" htmlFor="exampleCheck1">Remember me</label>
             </div>
             <button type="submit" className="btn btn-success">Login</button>
         </form>
